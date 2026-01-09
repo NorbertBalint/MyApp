@@ -1,0 +1,28 @@
+pipeline {
+    agent {
+        docker {
+            image 'reactnativecommunity/react-native-android'
+            args '-u root'   // allows installing missing SDK components
+        }
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build APK') {
+            steps {
+                sh './gradlew assembleDebug'
+            }
+        }
+
+        stage('Archive APK') {
+            steps {
+                archiveArtifacts artifacts: '**/app-debug.apk', fingerprint: true
+            }
+        }
+    }
+}
