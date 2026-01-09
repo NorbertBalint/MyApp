@@ -28,4 +28,5 @@ pipeline {
                 archiveArtifacts artifacts: '**/app-debug.apk', fingerprint: true
             }
         }
+    }
 }
