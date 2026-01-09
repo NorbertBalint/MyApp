@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+options {
+    skipDefaultCheckout(true)
+  }
+
     stages {
         stage('Checkout') {
             steps {
@@ -22,7 +26,7 @@ pipeline {
                 docker {
                   image "android-dev:latest"
                   args "-v android-dev:latest-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
-                  reuseNode true
+
                 }
             }
 
