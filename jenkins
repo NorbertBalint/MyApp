@@ -18,13 +18,13 @@ pipeline {
         }
 
         stage('Build APK') {
-        agent {
+            agent {
                 docker {
-                  image "${env.DOCKER_IMAGE}:${env.DOCKER_VERSION}"
-                  args "-v ${env.DOCKER_IMAGE}-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
+                  image "android-dev:latest"
+                  args "-v android-dev:latest-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
                   reuseNode true
                 }
-        }
+            }
 
             steps {
                 sh './gradlew assembleDebug'
