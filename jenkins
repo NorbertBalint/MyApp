@@ -16,7 +16,7 @@ options {
           steps {
             echo "Build docker on ..."
             script {
-              docker.build("android-dev:latest")
+              docker.build("android")
             }
           }
         }
@@ -24,9 +24,9 @@ options {
         stage('Build APK') {
             agent {
                 docker {
-                  image "android-dev:latest"
-                  args "-v android-dev:latest-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
-
+                  image "android"
+                  args "-v android-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
+                  reuseNode true
                 }
             }
 
