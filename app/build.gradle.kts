@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -36,6 +38,31 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+fun getGitHash(): String {
+    return try {
+        val stdout = ByteArrayOutputStream()
+        project.exec {
+            commandLine("git", "rev-parse", "--short", "HEAD")
+            standardOutput = stdout
+        }
+        stdout.toString().trim()
+    } catch (e: Exception) {
+        "nogit"
+    }
+}
+
+android.applicationVariants.configureEach {
+    val buildTypeName = buildType.name
+    val versionNameSafe = versionName ?: "0.0.0"
+    val buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
+    val hash = getGitHash()
+
+    outputs.configureEach {
+        val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
+        outputImpl.outputFileName = "app-${buildTypeName}-$versionNameSafe-$buildNumber-$hash.apk"
     }
 }
 
