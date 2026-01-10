@@ -1,5 +1,5 @@
 FROM jenkins/jenkins:2.516.1-jdk21
-USER root
+# USER root
 # RUN apt-get update && apt-get install -y lsb-release \
 #     wget \
 #     unzip \
