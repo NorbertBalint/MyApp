@@ -1,10 +1,16 @@
 pipeline {
     agent any
         stages {
-            stage('Build Docker Image') {
+            stage('Check Docker Version') {
                 steps {
                     sh 'docker version'
                 }
             }
+
+            stage('Build APK') {
+                        steps {
+                            sh './gradlew clean assembleDebug'
+                        }
+                    }
         }
 }
