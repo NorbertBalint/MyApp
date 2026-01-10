@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'myjenkins-blueocean:latest'
+            image 'myjenkins-blueocean:2.528.3-1'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
