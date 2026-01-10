@@ -1,15 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'myjenkins-blueocean:2.528.3-1'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'docker version'
+    agent any
+        stages {
+            stage('Build Docker Image') {
+                steps {
+                    sh 'docker version'
+                }
             }
         }
-    }
 }
