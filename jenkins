@@ -4,14 +4,14 @@ pipeline {
         stage('Docker build') {
             steps {
                 echo "Build docker on ${WORKSPACE}..."
-                script { docker.build("android:latest") }
+                script { docker.build("myandroid:latest") }
             }
         }
 
         stage('Build') {
             agent { docker {
-                        image 'android'
-                        args "-v android-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
+                        image 'myandroid'
+                        args "-v myandroid-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
                         reuseNode true } }
             steps {
                 sh 'chmod +x ./gradlew'
