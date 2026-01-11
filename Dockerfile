@@ -1,5 +1,6 @@
 # Use Ubuntu 22.04 LTS image...
 FROM ubuntu:22.04
+USER root
 
 # Install OpenJDK 17 LTS...
 RUN apt-get update -yqq \
