@@ -1,22 +1,16 @@
 pipeline {
     agent any
-    stages {
-        stage('Docker build') {
-            steps {
-                echo "Build docker on ${WORKSPACE}..."
-                script { docker.build("myandroid:latest") }
-            }
+        stages {
+            stage('Build APK') {
+                        steps {
+                            sh 'chmod +x ./gradlew'
+                            sh './gradlew clean assembleDebug'
+                        }
+                    }
+                    stage('Archive APK') {
+                        steps {
+                            archiveArtifacts artifacts: '**/*.apk', fingerprint: true
+                        }
+                    }
         }
-
-        stage('Build') {
-            agent { docker {
-                        image 'myandroid'
-                        args "-v myandroid-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
-                        reuseNode true } }
-            steps {
-                sh 'chmod +x ./gradlew'
-                sh './gradlew clean assembleDebug'
-            }
-        }
-    }
 }
