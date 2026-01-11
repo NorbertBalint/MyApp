@@ -1,10 +1,21 @@
 pipeline {
     agent any
     stages {
-            stage('Test') {
-                steps {
-                    echo 'Test'
-                }
+        stage('Docker build') {
+            steps {
+                echo "Build docker on ${WORKSPACE}..."
+                script { docker.build("android:latest") }
             }
         }
+
+        stage('Build') {
+            agent { docker {
+                        image 'android'
+                        reuseNode true } }
+            steps {
+                sh 'chmod +x ./gradlew'
+                sh './gradlew clean assembleDebug'
+            }
+        }
+    }
 }
