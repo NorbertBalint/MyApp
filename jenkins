@@ -11,6 +11,7 @@ pipeline {
         stage('Build') {
             agent { docker {
                         image 'android'
+                        args "-v android-gradle-cache:/workspace/.gradle -e GRADLE_USER_HOME=/workspace/.gradle"
                         reuseNode true } }
             steps {
                 sh 'chmod +x ./gradlew'

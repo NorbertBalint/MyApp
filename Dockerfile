@@ -1,6 +1,5 @@
 # Use Ubuntu 22.04 LTS image...
 FROM ubuntu:22.04
-USER root
 
 # Install OpenJDK 17 LTS...
 RUN apt-get update -yqq \
@@ -9,6 +8,7 @@ RUN apt-get update -yqq \
     && rm -rf /var/lib/apt/lists/*
 
 ENV ANDROID_SDK_ROOT=/opt/android-sdk
+ENV ANDROID_HOME=/opt/android-sdk
 ENV PATH=${PATH}:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${ANDROID_SDK_ROOT}/platform-tools
 
 # Download and install Android SDK command-line tools
