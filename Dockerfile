@@ -1,21 +1,12 @@
-FROM jenkins/jenkins:2.516.1-jdk21
-# USER root
-# RUN apt-get update && apt-get install -y lsb-release \
-#     wget \
-#     unzip \
-#     git \
-#     && rm -rf /var/lib/apt/lists/*
-# RUN curl -fsSLo /usr/share/keyrings/docker-archive-keyring.asc \
-#   https://download.docker.com/linux/debian/gpg
-# RUN echo "deb [arch=$(dpkg --print-architecture) \
-#   signed-by=/usr/share/keyrings/docker-archive-keyring.asc] \
-#   https://download.docker.com/linux/debian \
-#   $(lsb_release -cs) stable" > /etc/apt/sources.list.d/docker.list
-# RUN apt-get update && apt-get install -y docker-ce-cli
-# USER jenkins
-# RUN jenkins-plugin-cli --plugins "blueocean docker-workflow json-path-api"
+# Use Ubuntu 22.04 LTS image...
+FROM ubuntu:22.04
 
-# Set environment variables
+# Install OpenJDK 17 LTS...
+RUN apt-get update -yqq \
+    && apt-get install -y curl openjdk-17-jdk wget unzip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
 ENV ANDROID_SDK_ROOT=/opt/android-sdk
 ENV PATH=${PATH}:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${ANDROID_SDK_ROOT}/platform-tools
 
@@ -29,4 +20,4 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools \
 
 # Install SDK packages
 RUN yes | sdkmanager --licenses \
-    && sdkmanager "platform-tools" "platforms;android-32" "build-tools;32.0.0"
+    && sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
