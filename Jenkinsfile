@@ -2,8 +2,14 @@ pipeline {
 
     agent any
         stages {
+        stage('Log') {
+            steps {
+                    echo "BuildId: ${BUILD_ID}"
+                }
+        }
             stage('Build APK') {
                         steps {
+                            sh 'echo "$BUILD_ID"'
                             sh 'chmod +x ./gradlew'
                             sh './gradlew clean assembleDebug'
                         }
