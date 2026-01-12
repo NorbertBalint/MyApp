@@ -59,9 +59,11 @@ android.applicationVariants.configureEach {
     val versionNameSafe = versionName ?: "0.0.0"
     val buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
     val hash = getGitHash()
-    val branchName = when (System.getenv("GIT_BRANCH")) {
-        "main" -> "main"
-        "dev" -> "dev"
+    val branchNameClean = System.getenv("GIT_BRANCH")?.replaceFirst("^origin/".toRegex(), "")
+
+    val branchName = when (branchNameClean) {
+        "main" -> branchNameClean
+        "dev" -> branchNameClean
         else -> "noname"
     }
 
