@@ -59,10 +59,15 @@ android.applicationVariants.configureEach {
     val versionNameSafe = versionName ?: "0.0.0"
     val buildNumber = System.getenv("BUILD_NUMBER") ?: "0"
     val hash = getGitHash()
+    val branchName = when (System.getenv("BRANCH_NAME")) {
+        "main" -> "main"
+        "dev" -> "dev"
+        else -> "noname"
+    }
 
     outputs.configureEach {
         val outputImpl = this as com.android.build.gradle.internal.api.BaseVariantOutputImpl
-        outputImpl.outputFileName = "app-${buildTypeName}-$versionNameSafe-$buildNumber-$hash.apk"
+        outputImpl.outputFileName = "app-${buildTypeName}-$versionNameSafe-$branchName-$buildNumber-$hash.apk"
     }
 }
 
