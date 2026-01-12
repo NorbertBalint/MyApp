@@ -5,6 +5,7 @@ pipeline {
         stage('Log') {
             steps {
                     echo "BuildId: ${BUILD_ID}"
+                    echo "BRANCH_NAME: ${BRANCH_NAME}"
                 }
         }
 //             stage('Build APK') {
