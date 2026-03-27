@@ -12,9 +12,13 @@ pipeline {
             type: 'PT_BRANCH'
     }
 
-    options {
-        skipDefaultCheckout(true)
-    }
+    checkout([
+        $class: 'GitSCM',
+        branches: [[name: params.BRANCH]],
+        userRemoteConfigs: [[
+            url: env.GIT_REPO,
+        ]]
+    ])
 	
         stages {
 			stage('Log') {
