@@ -11,6 +11,10 @@ pipeline {
             tagFilter: '*',
             type: 'PT_BRANCH'
     }
+
+    options {
+        skipDefaultCheckout(true)
+    }
 	
         stages {
 			stage('Log') {
