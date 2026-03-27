@@ -19,12 +19,12 @@ pipeline {
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
-                    //echo "BRANCH_NAME: ${GIT_BRANCH}"
                     echo "PARAM_BRANCH_NAME: ${params.BRANCH}"
                     }
                 }
             }
     }
+    //echo "BRANCH_NAME: ${GIT_BRANCH}"
 //             stage('Build APK') {
 //                         steps {
 //                             sh 'chmod +x ./gradlew'
@@ -36,5 +36,3 @@ pipeline {
 //                             archiveArtifacts artifacts: '**/*.apk', fingerprint: true
 //                         }
 //             }
-
-}
