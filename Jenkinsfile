@@ -1,5 +1,9 @@
 pipeline {
 	agent any
+
+	environment {
+	    GIT_REPO = 'https://github.com/NorbertBalint/MyApp'
+	}
 	
 	parameters {
         gitParameter branchFilter: 'origin/(.*)',
