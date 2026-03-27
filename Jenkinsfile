@@ -15,25 +15,16 @@ pipeline {
     options {
         skipDefaultCheckout(true)
     }
-//     checkout([
-//         $class: 'GitSCM',
-//         branches: [[name: params.BRANCH]],
-//         userRemoteConfigs: [[
-//             url: env.GIT_REPO,
-//         ]]
-//     ])
-
-
-	
-        stages {
-
+    stages {
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
                     //echo "BRANCH_NAME: ${GIT_BRANCH}"
                     echo "PARAM_BRANCH_NAME: ${params.BRANCH}"
+                    }
                 }
-        }
+            }
+    }
 //             stage('Build APK') {
 //                         steps {
 //                             sh 'chmod +x ./gradlew'
@@ -45,5 +36,5 @@ pipeline {
 //                             archiveArtifacts artifacts: '**/*.apk', fingerprint: true
 //                         }
 //             }
-        }
+
 }
