@@ -20,27 +20,27 @@ pipeline {
         skipDefaultCheckout(true)
     }
     stages {
-    stage('Clone') {
-        steps {
-            script {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: "*/${params.BRANCH}"]],
-                    userRemoteConfigs: [[
-                        url: env.GIT_REPO,
-                    ]],
-                    doGenerateSubmoduleConfigurations: false,
-                                      extensions: [
-                                          [$class: 'CleanBeforeCheckout'],
-                                          [$class: 'WipeWorkspace']
-                                      ],
-                                      changelog: false,
-                                      poll: false
-
-                ])
-            }
-        }
-    }
+//     stage('Clone') {
+//         steps {
+//             script {
+//                 checkout([
+//                     $class: 'GitSCM',
+//                     branches: [[name: "*/${params.BRANCH}"]],
+//                     userRemoteConfigs: [[
+//                         url: env.GIT_REPO,
+//                     ]],
+//                     doGenerateSubmoduleConfigurations: false,
+//                                       extensions: [
+//                                           [$class: 'CleanBeforeCheckout'],
+//                                           [$class: 'WipeWorkspace']
+//                                       ],
+//                                       changelog: false,
+//                                       poll: false
+//
+//                 ])
+//             }
+//         }
+//     }
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
