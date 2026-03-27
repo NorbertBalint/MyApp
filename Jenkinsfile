@@ -12,19 +12,22 @@ pipeline {
             type: 'PT_BRANCH'
     }
 
-    checkout([
-        $class: 'GitSCM',
-        branches: [[name: params.BRANCH]],
-        userRemoteConfigs: [[
-            url: env.GIT_REPO,
-        ]]
-    ])
+    options {
+        skipDefaultCheckout(true)
+    }
+//     checkout([
+//         $class: 'GitSCM',
+//         branches: [[name: params.BRANCH]],
+//         userRemoteConfigs: [[
+//             url: env.GIT_REPO,
+//         ]]
+//     ])
 	
         stages {
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
-                    echo "BRANCH_NAME: ${GIT_BRANCH}"
+                    //echo "BRANCH_NAME: ${GIT_BRANCH}"
                     echo "PARAM_BRANCH_NAME: ${params.BRANCH}"
                 }
         }
