@@ -21,7 +21,7 @@ pipeline {
             script {
                 checkout([
                     $class: 'GitSCM',
-                    branches: [[name: params.BRANCH]],
+                    branches: [[name: "*/${params.BRANCH}"]],
                     userRemoteConfigs: [[
                         url: env.GIT_REPO,
                     ]]
