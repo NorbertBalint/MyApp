@@ -1,9 +1,20 @@
 pipeline {
-
-    agent any
+	agent any
+	
+	parameters {
+        gitParameter branchFilter: 'origin/(.*)',
+            defaultValue: 'main',
+            name: 'BRANCH',
+            quickFilterEnabled: true,
+            selectedValue: 'NONE',
+            sortMode: 'ASCENDING_SMART',
+            tagFilter: '*',
+            type: 'PT_BRANCH'
+    }
+	
         stages {
-        stage('Log') {
-            steps {
+			stage('Log') {
+				steps {
                     echo "BuildId: ${BUILD_ID}"
                     echo "BRANCH_NAME: ${GIT_BRANCH}"
                 }
