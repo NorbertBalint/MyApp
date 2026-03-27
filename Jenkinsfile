@@ -22,6 +22,20 @@ pipeline {
 //             url: env.GIT_REPO,
 //         ]]
 //     ])
+
+stage('Clone') {
+    steps {
+        script {
+            checkout([
+                $class: 'GitSCM',
+                branches: [[name: params.BRANCH]],
+                userRemoteConfigs: [[
+                    url: env.GIT_REPO
+                ]]
+            ])
+        }
+    }
+}
 	
         stages {
 			stage('Log') {
