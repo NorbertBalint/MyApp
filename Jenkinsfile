@@ -41,6 +41,15 @@ pipeline {
 //             }
 //         }
 //     }
+        stage('Checkout App') {
+            steps {
+                // This becomes the source for your "Changes" list in the UI
+                git url: 'https://github.com/NorbertBalint/MyApp',
+                    branch: params.BRANCH,
+                    changelog: true,
+                    poll: true
+            }
+        }
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
