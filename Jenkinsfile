@@ -17,6 +17,7 @@ pipeline {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
                     echo "BRANCH_NAME: ${GIT_BRANCH}"
+                    echo "PARAM_BRANCH_NAME: ${params.BRANCH}"
                 }
         }
 //             stage('Build APK') {
