@@ -44,6 +44,7 @@ pipeline {
         stage('Checkout App') {
             steps {
                 // This becomes the source for your "Changes" list in the UI
+                cleanWs()
                 git url: 'https://github.com/NorbertBalint/MyApp',
                     branch: params.BRANCH,
                     changelog: true,
