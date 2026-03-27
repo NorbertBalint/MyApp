@@ -17,7 +17,7 @@ pipeline {
     }
 
     options {
-        skipDefaultCheckout()
+        skipDefaultCheckout(true)
     }
     stages {
 //     stage('Clone') {
