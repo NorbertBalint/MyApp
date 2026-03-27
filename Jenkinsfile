@@ -16,6 +16,19 @@ pipeline {
         skipDefaultCheckout(true)
     }
     stages {
+    stage('Clone') {
+        steps {
+            script {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: params.BRANCH]],
+                    userRemoteConfigs: [[
+                        url: env.GIT_REPO,
+                    ]]
+                ])
+            }
+        }
+    }
 			stage('Log') {
 				steps {
                     echo "BuildId: ${BUILD_ID}"
