@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         //line main
+        // another line
     }
 }
 
