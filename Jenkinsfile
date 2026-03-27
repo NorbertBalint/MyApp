@@ -28,7 +28,15 @@ pipeline {
                     branches: [[name: "*/${params.BRANCH}"]],
                     userRemoteConfigs: [[
                         url: env.GIT_REPO,
-                    ]]
+                    ]],
+                    doGenerateSubmoduleConfigurations: false,
+                                      extensions: [
+                                          [$class: 'CleanBeforeCheckout'],
+                                          [$class: 'WipeWorkspace']
+                                      ],
+                                      changelog: false,
+                                      poll: false
+
                 ])
             }
         }
